@@ -13,9 +13,9 @@ export const StyledDashboardPage = styled.main`
             margin: 0 auto;
             
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 45px;
+            flex-direction: column;
+            gap: 10px;
+            padding-top: 30px;
         }
     }
 
@@ -37,12 +37,16 @@ export const StyledDashboardPage = styled.main`
     @media (min-width: 1024px){
         .user__container {
             div {
-                width: 700px;
+                width: 800px;
+                flex-direction: row;
+                justify-content: space-between;
+
+                padding-top: 45px;
             }
         }
 
         .user__tasks{
-            width: 700px;
+            width: 800px;
         }
     }
 `

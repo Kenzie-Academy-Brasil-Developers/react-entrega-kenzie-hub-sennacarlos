@@ -28,7 +28,7 @@ export const StyledHeader = styled.header`
 
     @media (min-width: 1024px) {
         nav {
-            width: 700px;
+            width: 800px;
             padding: 12px 0;
 
             button {

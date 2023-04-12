@@ -4,8 +4,7 @@ import { Global } from "./styles/globalStyles"
 import 'react-toastify/dist/ReactToastify.css';
 
 
-function App() {
-  
+const App = () => {
 
   return (
     <>
