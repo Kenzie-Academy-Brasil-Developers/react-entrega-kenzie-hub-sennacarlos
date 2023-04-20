@@ -23,14 +23,28 @@ export const StyledDashboardPage = styled.main`
         width: 95%;
         margin: 0 auto;
 
-        h3 {
-            font-size: var(--title-1);
-            margin: 47px 0 23px;
-        }
+        div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
 
-        p {
-            font-size: var(--title-2);
-            font-weight: 400;
+            margin: 20px 0 20px 0;
+
+            h3 {
+                font-size: var(--title-2);
+                font-weight: 600;
+            }
+            
+            button {
+                width: 32px;
+                height: 32px;
+
+                border-radius: var(--radius-default);
+                background-color: var(--grey-3);
+                color: var(--grey-0);
+
+                font-size: var(--title-2);
+            }
         }
     }
 

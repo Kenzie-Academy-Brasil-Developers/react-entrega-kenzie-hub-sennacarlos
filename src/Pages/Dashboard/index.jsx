@@ -1,30 +1,23 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { Header } from "../../components/Header"
 import { StyledDashboardPage } from "./style"
-import { api } from "../../services/api"
+import { UserContext } from "../../providers/UserContext"
+import { TechList } from "../../components/TechList"
+import { CreateTech } from "../../components/CreateTech"
+import { EditAndDeleteTech } from "../../components/EditAndDeleteTech"
+import { TechContext } from "../../providers/TechContext"
 
 
 export const DashboardPage = () => {
-    const [user, setUser] = useState(null)
-
-    useEffect(() =>  {
-        async function loadUser() {
-            
-            const token = localStorage.getItem("@kenzieHub:token")
-            const response = await api.get("/profile", {
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            }) 
-            setUser(response.data)
-
-        }
-        loadUser()
-    }, [])
+    const { user } = useContext(UserContext)
+    const { isOpen, setIsOpen} = useContext(TechContext)
+    const { modalOpen, setModalOpen } = useContext(TechContext)
 
     return (
         <>
-        <Header setUser={setUser}/>
+            {modalOpen ? <EditAndDeleteTech /> : null}
+            {isOpen ? <CreateTech /> : null}
+        <Header />
         <StyledDashboardPage>
             <section className="user__container">
                 <div>
@@ -33,11 +26,13 @@ export const DashboardPage = () => {
                 </div>
             </section>
             <section className="user__tasks">
-                <h3>Que pena! Estamos em desenvolvimento :(</h3>
-                <p>Nossa aplicação está em desenvolvimento, em breve teremos novidades</p>
+                <div>
+                    <h3>Tecnologias</h3>
+                    <button onClick={() => setIsOpen(true)}>+</button> 
+                </div>
+                <TechList setModalOpen={setModalOpen} />
             </section>
         </StyledDashboardPage>
-        
         </>
     )
 }

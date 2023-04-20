@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 
 
 export const Global = createGlobalStyle`
@@ -10,6 +10,7 @@ export const Global = createGlobalStyle`
         box-sizing: border-box;
         font-family: 'Inter', sans-serif;
         text-decoration: none;
+        list-style: none;
     }
 
     :root {
@@ -42,7 +43,7 @@ export const Global = createGlobalStyle`
         height: 38px ;
     }
 
-    input {
+    input, select, option {
         color: var(--grey-1);
         background-color: var(--grey-2);
 
@@ -55,7 +56,7 @@ export const Global = createGlobalStyle`
         outline: none;
     }
 
-    input:focus {
+    input:focus, select:focus {
         border: 1px solid var(--grey-0);
 
         color: var(--grey-0);
@@ -78,7 +79,7 @@ export const Global = createGlobalStyle`
             margin: 0 auto;
         }
 
-        input {
+        input, select, option {
             height: 48px;
         }
 
@@ -86,4 +87,18 @@ export const Global = createGlobalStyle`
             height: 48px;
         }
     }
+`
+
+export const ModalContainer = styled.div`
+    background-color: rgba(0, 0, 0, .4);
+    width: 100%;
+    height: 100%;
+
+    align-items: center;
+    margin: 0 auto;
+
+    display: flex;
+    justify-content: center;
+
+    position: absolute;
 `

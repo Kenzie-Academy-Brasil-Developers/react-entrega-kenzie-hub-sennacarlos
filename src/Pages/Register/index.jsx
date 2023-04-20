@@ -4,8 +4,8 @@ import { StyledRegiserPage } from "./style"
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { schemaRegister } from "./validator";
-import { api } from "../../services/api";
-import { toast } from "react-toastify";
+import { useContext } from "react";
+import { UserContext } from "../../providers/UserContext";
 
 export const RegisterPage = () => {
     const navigate = useNavigate();
@@ -13,16 +13,10 @@ export const RegisterPage = () => {
 
     const {register, handleSubmit, formState: { errors }} = useForm({resolver: zodResolver(schemaRegister)})
  
-    const handleRegister = async (data) => {
-        try {
-            await api.post("/users", data)
-
-            toast.success("Contra criada com sucesso!")
-            
-            navigate("/")
-        } catch (error) {
-            toast.error("Ops! Algo deu errado")
-        }
+    const { userRegister } = useContext(UserContext)
+   
+    const submit = async (formData) => {
+        await userRegister(formData)
     }
 
     return (
@@ -34,7 +28,7 @@ export const RegisterPage = () => {
             <div className="container__Form--register">
                 <h3>Crie sua conta</h3>
                 <span>Rápido e grátis, vamos nessa!</span>
-                <form onSubmit={handleSubmit(handleRegister)}>
+                <form onSubmit={handleSubmit(submit)}>
                     <Input
                         type="text"
                         id="name"

@@ -12,7 +12,7 @@ export const ContainerInput = styled.div`
     }
 
     input {
-        margin-bottom: 26px; 
+        margin-bottom: 15px; 
     }
     
     p {

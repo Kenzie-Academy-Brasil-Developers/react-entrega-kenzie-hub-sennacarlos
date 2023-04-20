@@ -1,20 +1,15 @@
+import { useContext } from "react"
 import { StyledHeader } from "./style"
-import { useNavigate } from "react-router-dom"
+import { UserContext } from "../../providers/UserContext"
 
-export const Header = ({setUser}) => {
-    const navigate = useNavigate()
-
-    const logout = () => {
-        localStorage.clear()
-        navigate("/")
-        setUser(null)
-    }
+export const Header = () => {
+    const { userLogout } = useContext(UserContext)
 
     return (
         <StyledHeader>
             <nav>
                 <h1 className="logoKenzieHub">KenzieHub</h1>
-                <button onClick={logout}>Sair</button>
+                <button onClick={() => userLogout()}>Sair</button>
             </nav>
         </StyledHeader>
     )

@@ -3,9 +3,10 @@ import { StyledLoginPage } from "./style"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { schemaLogin } from "./validator"
-import { useNavigate, Link } from "react-router-dom"
-import { api } from "../../services/api"
-import { toast } from "react-toastify"
+import { Link } from "react-router-dom"
+import { useContext } from "react"
+import { UserContext } from "../../providers/UserContext"
+
 
 export const LoginPage = () => {
     const {
@@ -14,24 +15,13 @@ export const LoginPage = () => {
         formState: { errors },
       } = useForm({
         resolver: zodResolver(schemaLogin),
-      })
+    })
 
-    const navigate = useNavigate();
+    const { userLogin } = useContext(UserContext);
 
-    const handleLogin = async (body) => {
-        try {
-            const response = await api.post("/sessions", body)
-            
-            localStorage.setItem("@kenzieHub:userId", response.data.user.id)
-            localStorage.setItem("@kenzieHub:token", response.data.token)
-
-            navigate('/dashboard')
-            
-        } catch (error) {
-            toast.error("Email ou senha inválidos")
-        }
+    const submit = async (formData) => {
+        await userLogin(formData)
     }
-
 
     return (
 
@@ -39,7 +29,7 @@ export const LoginPage = () => {
             <h1 className="logoKenzieHub">KenzieHub</h1>
             <div className="container__Form">
                 <h2>Login</h2>
-                <form onSubmit={handleSubmit(handleLogin)}>
+                <form onSubmit={handleSubmit(submit)}>
                     <Input
                         type="email"
                         id="email"
